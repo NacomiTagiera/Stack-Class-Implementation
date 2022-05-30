@@ -1,0 +1,78 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Stos
+{
+    int *tab;
+    int wierzch, rozmiar;
+
+    public:
+        Stos(int rozmiar)
+        {
+            this->rozmiar = rozmiar;
+            tab = new int[rozmiar];
+        }
+
+        Stos()
+        {
+            rozmiar = 20;
+            wierzch = -1;
+            tab = new int[rozmiar];
+        }
+
+        void push(int liczba)
+        {
+            tab[++wierzch] = liczba;
+        }
+
+        void pop()
+        {
+            --wierzch;
+        }
+
+        int top()
+        {
+            return tab[wierzch];
+        }
+
+        bool empty()
+        {
+            return wierzch == -1;
+
+        }
+
+        bool full()
+        {
+            return wierzch == rozmiar - 1;
+        }
+
+        ~Stos()
+        {
+            delete [] tab;
+        }
+};
+
+
+int main()
+{
+   Stos s1;
+   Stos s2;
+   int i = 0;
+
+   while(!s1.full())
+   {
+       s1.push(i);
+       i++;
+   }
+
+   while(!s2.full() && !s1.empty())
+   {
+       int x = s1.top();
+       cout << x << endl;
+       s1.pop();
+       s2.push(x);
+   }
+
+   return 0;
+}
+
